@@ -13,7 +13,7 @@ def index():
     if request.method == 'POST':
         data = request.get_json()
 
-        # dubug purpose: show in console row data received
+        # dubug purpose: show in console raw data received
         print("Request received: \n"+json.dumps(data, sort_keys=True, indent=4))
 
         # get the name of the action that triggered this request (add, update, delete, test)
@@ -43,4 +43,4 @@ def index():
             pass
 
     # always return a 200 (ok)
-    return "ok\n"
+    return "OK"
