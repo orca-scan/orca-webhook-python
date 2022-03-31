@@ -40,7 +40,7 @@ source ./orca/bin/activate
 export FLASK_ENV=development
 
 # start the project
-flask run
+flask run -p 5000 
 ```
 
 Your WebHook receiver will now be running on port 5000.
@@ -48,7 +48,7 @@ Your WebHook receiver will now be running on port 5000.
 You can emulate an Orca Scan WebHook using [cURL](https://dev.to/ibmdeveloper/what-is-curl-and-why-is-it-all-over-api-docs-9mh) by running the following:
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:5000' \
+curl --location --request POST 'http://127.0.0.1:5000/webhook-orca' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "___orca_action": "add",
@@ -72,14 +72,16 @@ curl --location --request POST 'http://127.0.0.1:5000' \
 2. Properties in the JSON payload are an exact match to the  field names in your sheet _(case and space)_
 3. WebHooks are never retried, regardless of the HTTP response
 
-## How this example works
+## Example
 
 This [example](app.py) uses the [flask](https://github.com/pallets/flask) framework:
 
+### WebHook Out 
+
 ```python
 # POST / handler
-@app.route('/', methods=['POST'])
-def index():
+@app.route('/orca-webhook', methods=['POST'])
+def webhook_out():
     if request.method == 'POST':
         data = request.get_json()
 
@@ -110,7 +112,23 @@ def index():
             pass
 
     # always return a 200 (ok)
-    return "ok\n"
+    return "ok"
+```
+
+### WebHook In 
+
+```python
+def webhook_in():
+    # the following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
+    response = requests.post('https://httpbin.org/post', json={ # TODO: change url to https://api.orcascan.com/sheets/{id}
+            "___orca_action": "add",
+            "Barcode": "0123456789",
+            "Name": "New 1",
+            "Quantity": 12,
+            "Description": "Add new row example"
+        })
+    if response.ok:
+        print(response.json())
 ```
 
 ## Troubleshooting
@@ -119,6 +137,10 @@ If you run into any issues not listed here, please [open a ticket](https://githu
 
 ## Examples in other langauges
 * [orca-webhook-dotnet](https://github.com/orca-scan/orca-webhook-dotnet)
+* [orca-webhook-python](https://github.com/orca-scan/orca-webhook-python)
+* [orca-webhook-go](https://github.com/orca-scan/orca-webhook-go)
+* [orca-webhook-java](https://github.com/orca-scan/orca-webhook-java)
+* [orca-webhook-php](https://github.com/orca-scan/orca-webhook-php)
 
 ## History
 

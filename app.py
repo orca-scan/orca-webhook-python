@@ -1,15 +1,26 @@
 # import flask framework
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, request
+import requests
 import json
 
 # create a flask app instance
 app = Flask(__name__)
 
+def webhook_in():
+    # the following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
+    response = requests.post('https://httpbin.org/post', json={ # TODO: change url to https://api.orcascan.com/sheets/{id}
+            "___orca_action": "add",
+            "Barcode": "0123456789",
+            "Name": "New 1",
+            "Quantity": 12,
+            "Description": "Add new row example"
+        })
+    if response.ok:
+        print(response.json())
+
 # POST / handler
-@app.route('/', methods=['POST'])
-def index():
+@app.route('/orca-webhook', methods=['POST'])
+def webhook_out():
     if request.method == 'POST':
         data = request.get_json()
 
@@ -41,6 +52,8 @@ def index():
         elif action == "test":
             # TODO: do something when the user in the web app hits the test button
             pass
-
+        
     # always return a 200 (ok)
-    return "OK"
+    return "ok"
+
+
