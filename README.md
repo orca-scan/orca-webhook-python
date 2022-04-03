@@ -1,6 +1,6 @@
 # orca-webhook-python
 
-Example of how to build an [Orca Scan WebHook Out](https://orcascan.com/docs/api/webhooks) endpoint and [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) in using [Python](https://www.python.org/) and [flask](https://github.com/pallets/flask) framework.
+Example of how to build an [Orca Scan WebHook Out](https://orcascan.com/docs/api/webhooks) endpoint and [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [Python](https://www.python.org/) and [flask](https://github.com/pallets/flask) framework.
 
 ## Install
 
