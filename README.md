@@ -48,7 +48,7 @@ Your WebHook receiver will now be running on port 5000.
 You can emulate an Orca Scan WebHook using [cURL](https://dev.to/ibmdeveloper/what-is-curl-and-why-is-it-all-over-api-docs-9mh) by running the following:
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:5000/webhook-orca' \
+curl --location --request POST 'http://127.0.0.1:5000/orca-webhook-out' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "___orca_action": "add",
@@ -82,7 +82,7 @@ This [example](app.py) uses the [flask](https://github.com/pallets/flask) framew
 
 ```python
 # POST / handler
-@app.route('/orca-webhook', methods=['POST'])
+@app.route('/orca-webhook-out', methods=['POST'])
 def webhook_out():
     if request.method == 'POST':
         data = request.get_json()
@@ -134,6 +134,8 @@ def webhook_in():
     if response.ok:
         print(response.json())
 ```
+
+Use `http://127.0.0.1:5000/trigger-webhook-in` to trigget the webhook in and send the request.
 
 ## Test server locally on Orca Cloud
 

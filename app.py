@@ -20,7 +20,7 @@ def webhook_in():
         print(response.content)
 
 # POST / handler
-@app.route('/orca-webhook', methods=['POST'])
+@app.route('/orca-webhook-out', methods=['POST'])
 def webhook_out():
     if request.method == 'POST':
         data = request.get_json()
