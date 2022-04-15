@@ -135,7 +135,7 @@ def webhook_in():
         print(response.json())
 ```
 
-Use `http://127.0.0.1:5000/trigger-webhook-in` to trigget the webhook in and send the request.
+Use `http://127.0.0.1:5000/trigger-webhook-in` to trigget the in webhook and send the request.
 
 ## Test server locally on Orca Cloud
 
