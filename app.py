@@ -6,19 +6,6 @@ import json
 # create a flask app instance
 app = Flask(__name__)
 
-def webhook_in():
-    # the following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
-    # TODO: change url to https://api.orcascan.com/sheets/{id}
-    response = requests.post('https://httpbin.org/post', json={ 
-            "___orca_action": "add",
-            "Barcode": "0123456712",
-            "Name": "New 1",
-            "Quantity": 12,
-            "Description": "Add new row example"
-        })
-    if response.ok:
-        print(response.content)
-
 # POST / handler
 @app.route('/orca-webhook-out', methods=['POST'])
 def webhook_out():
@@ -60,5 +47,15 @@ def webhook_out():
 # Trigger Webhook In
 @app.route('/trigger-webhook-in', methods=['GET'])
 def trigger_webhook_in():
-    webhook_in()
+    # the following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
+    # TODO: change url to https://api.orcascan.com/sheets/{id}
+    response = requests.post('https://httpbin.org/post', json={ 
+            "___orca_action": "add",
+            "Barcode": "0123456712",
+            "Name": "New 1",
+            "Quantity": 12,
+            "Description": "Add new row example"
+        })
+    if response.ok:
+        print(response.content)
     return "ok"

@@ -122,17 +122,21 @@ def webhook_out():
 [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706)
 
 ```python
-def webhook_in():
+# Trigger Webhook In
+@app.route('/trigger-webhook-in', methods=['GET'])
+def trigger_webhook_in():
     # the following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
-    response = requests.post('https://httpbin.org/post', json={ # TODO: change url to https://api.orcascan.com/sheets/{id}
+    # TODO: change url to https://api.orcascan.com/sheets/{id}
+    response = requests.post('https://httpbin.org/post', json={ 
             "___orca_action": "add",
-            "Barcode": "0123456789",
+            "Barcode": "0123456712",
             "Name": "New 1",
             "Quantity": 12,
             "Description": "Add new row example"
         })
     if response.ok:
-        print(response.json())
+        print(response.content)
+    return "ok"
 ```
 
 Use `http://127.0.0.1:5000/trigger-webhook-in` to trigget the in webhook and send the request.
