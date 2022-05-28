@@ -6,9 +6,16 @@ Example of how to build an [Orca Scan WebHook Out](https://orcascan.com/docs/api
 
 First ensure you have [Python](https://www.python.org/downloads/) installed:
 
+**macOS or Linux**
 ```bash
 # should return 3.7 or higher
 python3 --version
+```
+
+**Windows**
+```bash
+# should return 3.7 or higher
+python --version
 ```
 
 Then execute the following:
@@ -19,12 +26,21 @@ git clone https://github.com/orca-scan/orca-webhook-python.git
 
 # go into the new directory
 cd orca-webhook-python
-
+```
+**macOS or Linux**
+```bash
 # create virtual environment and activate it
 python3 -m venv orca && source ./orca/bin/activate
-
+```
+**Windows**
+```bash
+# create virtual environment and activate it
+python -m venv orca && source ./orca/scripts/activate
+```
+**All**
+```bash
 # upgrade pip to latest version
-pip install --upgrade pip
+python -m pip install --upgrade pip
 
 # install dependencies
 pip install -r requirements.txt
@@ -32,10 +48,18 @@ pip install -r requirements.txt
 
 ## Run
 
+**macOS or Linux**
 ```bash
 # activate virtual environment
 source ./orca/bin/activate
-
+```
+**Windows**
+```bash
+# activate virtual environment
+source ./orca/scripts/activate
+```
+**All**
+```bash
 # enable development features only for development
 export FLASK_ENV=development
 
